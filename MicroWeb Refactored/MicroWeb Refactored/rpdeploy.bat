@@ -1,0 +1,1 @@
+scp -r "C:\Users\cicel\source\repos\MicroWeb Refactored\MicroWeb Refactored\bin\Release\net8.0\linux-arm64\*" atx@192.168.0.227:/home/atx/microweb/

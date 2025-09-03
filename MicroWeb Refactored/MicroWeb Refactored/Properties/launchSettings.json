@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MicroWeb Refactored": {
+      "commandName": "Project",
+      "commandLineArgs": "root:Root rootfile:hehe.txt"
+    }
+  }
+}
