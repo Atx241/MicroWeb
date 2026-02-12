@@ -21,7 +21,7 @@ namespace MicroWeb_Refactored
         {
             public byte[] Data;
             public int Code;
-            public static BasicResult Fail = new BasicResult([], 404);
+            public static BasicResult Fail = new BasicResult((byte[])[], 404);
             public BasicResult(byte[] Data, int Code)
             {
                 this.Data = Data;
