@@ -12,6 +12,8 @@ namespace MicroWeb_Refactored
         static string? rootFile = null;
         static string? authKeysFile = null;
         static char sep = Path.DirectorySeparatorChar;
+        static string httpPort = "80";
+        static string httpsPort = "443";
         //Version
         const int majorVersion = 0;
         const int minorVersion = 0;
@@ -63,6 +65,18 @@ namespace MicroWeb_Refactored
                 if (rootFile == "")
                 {
                     rootFile = null;
+                }
+                Console.WriteLine("Enter HTTP port (leave blank for default)");
+                httpPort = Console.ReadLine() ?? httpPort;
+                if (httpPort == "")
+                {
+                    httpPort = "80";
+                }
+                Console.WriteLine("Enter HTTPS port (leave blank for default)");
+                httpsPort = Console.ReadLine() ?? httpsPort;
+                if (httpsPort == "")
+                {
+                    httpsPort = "443";
                 }
                 Console.WriteLine("Enter authentication keys file (leave blank to automatically detect)");
                 authKeysFile = Console.ReadLine();
@@ -135,7 +149,8 @@ namespace MicroWeb_Refactored
                             Err("An authentication key was shorter than 10 characters, and will therefore not be allowed");
                         }
                         keys.Add(key);
-                        if (entry.Length > 1) {
+                        if (entry.Length > 1)
+                        {
                             restrictedKeys++;
                             authKeyAllowedFiles.Add(key, entry[1..]);
                         }
@@ -236,7 +251,8 @@ namespace MicroWeb_Refactored
         }
         static async Task WebLoop(HttpListener listener)
         {
-            try {
+            try
+            {
                 var context = listener.GetContext();
                 HttpListenerRequest request = context.Request;
                 var url = string.Join(null, request.Url?.Segments[1..] ?? []);
@@ -374,14 +390,16 @@ namespace MicroWeb_Refactored
                         {
                             return new BasicResult("Invalid URL", 404);
                         }
-                    } catch (Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         Console.WriteLine("An exception was handled when processing a request, stating: " + ex.ToString());
-                        return new BasicResult("An unexpected server error has occured",404);
+                        return new BasicResult("An unexpected server error has occured", 404);
                     }
                 }
                 response.Respond(await GetResponse());
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine("An exception was handled, stating: \n" + ex.ToString());
             }
