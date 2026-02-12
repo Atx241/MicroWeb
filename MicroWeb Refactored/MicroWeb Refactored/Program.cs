@@ -14,16 +14,17 @@ namespace MicroWeb_Refactored
         static char sep = Path.DirectorySeparatorChar;
         static string httpPort = "80";
         static string httpsPort = "443";
+        static byte[] fileNotFoundData = (byte[])[];
         //Version
-        const int majorVersion = 0;
+        const int majorVersion = 1;
         const int minorVersion = 0;
-        const int incrementalVersion = 16;
+        const int incrementalVersion = 1;
         const bool localDebug = false;
         public struct BasicResult
         {
             public byte[] Data;
             public int Code;
-            public static BasicResult Fail = new BasicResult((byte[])[], 404);
+            public static BasicResult Fail = new BasicResult(fileNotFoundData, 404);
             public BasicResult(byte[] Data, int Code)
             {
                 this.Data = Data;
@@ -162,6 +163,10 @@ namespace MicroWeb_Refactored
             else if (authKeysFile != null)
             {
                 Err("Specified authentication keys file could not be found");
+            }
+            if (File.Exists(root + "/404"))
+            {
+                fileNotFoundData = File.ReadAllBytes(root + "/404");
             }
             Assert(root != null, "Root folder was not specified");
             Assert(Directory.Exists(root) && !root.EndsWith(sep), "The root folder is invalid. Ensure that the directory exists, and does not end with a delimiter");
