@@ -234,13 +234,13 @@ namespace MicroWeb_Refactored
 #pragma warning disable
             if (localDebug)
             {
-                listener.Prefixes.Add("http://localhost:80/");
-                listener.Prefixes.Add("https://localhost:443/");
+                listener.Prefixes.Add("http://localhost:" + httpPort + "/");
+                listener.Prefixes.Add("https://localhost:" + httpsPort + "/");
             }
             else
             {
-                listener.Prefixes.Add("http://*:80/");
-                listener.Prefixes.Add("https://*:443/");
+                listener.Prefixes.Add("http://*:" + httpPort + "/");
+                listener.Prefixes.Add("https://*:" + httpsPort + "/");
             }
 #pragma warning restore
             listener.Start();
