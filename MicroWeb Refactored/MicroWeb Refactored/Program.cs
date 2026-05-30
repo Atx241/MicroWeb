@@ -240,7 +240,7 @@ namespace MicroWeb_Refactored
             if (localDebug)
             {
                 listener.Prefixes.Add("http://localhost:" + httpPort + "/");
-                listener.Prefixes.Add("https://localhost:" + httpsPort + "/");
+                listener.Prefixes.Add("http://localhost:" + httpsPort + "/");
             }
             else
             {
